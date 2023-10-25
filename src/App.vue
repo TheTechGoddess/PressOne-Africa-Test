@@ -4,7 +4,7 @@
       <table class="">
         <thead>
           <tr>
-            <th class="sticky-project-name">Project Name</th>
+            <th class="sticky-project-name sticky">Project Name</th>
             <th>Developer</th>
             <th>Main Contractor</th>
             <th>Address</th>
@@ -14,31 +14,32 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="project in data"
-            :key="project.id"
-            :style="{ background: colors[project.id % colors.length] }"
-            class="text-4D5964"
-          >
-            <td class="cell sticky-project-name">
+          <tr v-for="project in data" :key="project.id" class="text-4D5964">
+            <td
+              class="cell sticky-project-name"
+              :style="{ background: colors[project.id % colors.length] }"
+            >
               {{ project.project_name }}
             </td>
-            <td class="cell">
+            <td :style="{ background: colors[project.id % colors.length] }">
               {{ project.developer }}
             </td>
-            <td class="cell">
+            <td :style="{ background: colors[project.id % colors.length] }">
               {{ project.main_contractor }}
             </td>
-            <td class="cell">
+            <td :style="{ background: colors[project.id % colors.length] }">
               {{ project.address }}
             </td>
-            <td class="cell">
+            <td :style="{ background: colors[project.id % colors.length] }">
               {{ project.state }}
             </td>
-            <td class="text-C39B57 cell">
+            <td
+              class="text-C39B57"
+              :style="{ background: colors[project.id % colors.length] }"
+            >
               <span class="bg-FEE2B2"> {{ project.status }}</span>
             </td>
-            <td class="cell">
+            <td :style="{ background: colors[project.id % colors.length] }">
               {{ project.sector }}
             </td>
           </tr>
@@ -155,12 +156,16 @@ const colors = ["#FFF", "#F6FAFD"];
 body {
   font-family: sans-serif;
 }
+.sticky {
+  box-shadow: 5px 10px;
+}
 .margin {
   margin: 32px 8px;
 }
 .table-container {
   overflow-x: auto;
-  z-index: 10;
+  border-radius: 10px;
+  font-family: "Roboto", sans-serif;
 }
 
 table {
@@ -172,12 +177,12 @@ thead {
   color: white;
   text-align: left;
   text-transform: capitalize;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 th {
-  padding: 20px 12px;
+  padding: 28px 12px;
   font-weight: bold;
   background-color: #28394b;
 }
@@ -187,7 +192,7 @@ tbody {
 }
 
 tr {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 tr:nth-child(odd) {
@@ -207,11 +212,12 @@ td {
   padding: 28px 12px;
 }
 
-.sticky-project-name {
-  position: sticky;
-  left: 0;
-  z-index: 100;
-  font-weight: bold;
+@media screen and (min-width: 768px) {
+  .sticky-project-name {
+    position: sticky;
+    left: 0;
+    font-weight: bold;
+  }
 }
 
 .text-4D5964 {
@@ -225,5 +231,9 @@ td {
 .bg-FEE2B2 {
   background-color: #fee2b2;
   padding: 2px 8px;
+}
+.cell {
+  box-shadow: 5px 10px rgba(0, 0, 0, 0.2); /* Add box shadow to sticky-project-name */
+  z-index: 2;
 }
 </style>
